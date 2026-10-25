@@ -3,11 +3,11 @@ name: DSH integration
 on:
   pull_request:
     paths:
-      - 'integrations/deepseek-harness/**'
-      - '.github/workflows/dsh.yml'
+    - 'integrations/deepseek-harness/**'
+    - '.github/workflows/dsh.yml'
   push:
     tags:
-      - '**'
+    - '**'
   workflow_dispatch:
     inputs:
       adapter_release:
@@ -24,14 +24,14 @@ jobs:
     name: DSH package contract
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - name: Static adapter contracts
-        run: node --test integrations/deepseek-harness/test/*.test.mjs
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+    - name: Static adapter contracts
+      run: node --test integrations/deepseek-harness/test/*.test.mjs
 
   distribution-acceptance:
     name: DSH distribution acceptance
@@ -39,17 +39,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - uses: pnpm/action-setup@v5
-        with:
-          version: 10
-      - name: Real tarball install, discovery, package-smoke, uninstall
-        run: node integrations/deepseek-harness/scripts/distribution-acceptance.mjs
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+    - uses: pnpm/action-setup@v5
+      with:
+        version: 10
+    - name: Real tarball install, discovery, package-smoke, uninstall
+      run: node 
+        integrations/deepseek-harness/scripts/distribution-acceptance.mjs
 
   adapter-release:
     name: adapter release (${{ matrix.os }})
@@ -64,15 +65,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - uses: pnpm/action-setup@v5
-        with:
-          version: 10
-      - name: Real DSH distribution acceptance
-        run: node integrations/deepseek-harness/scripts/distribution-acceptance.mjs
-        shell: bash
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+    - uses: pnpm/action-setup@v5
+      with:
+        version: 10
+    - name: Real DSH distribution acceptance
+      run: node 
+        integrations/deepseek-harness/scripts/distribution-acceptance.mjs
+      shell: bash
