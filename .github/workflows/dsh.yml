@@ -6,14 +6,8 @@ on:
       - 'integrations/deepseek-harness/**'
       - '.github/workflows/dsh.yml'
   push:
-    branches: [main]
-    paths:
-      - 'integrations/deepseek-harness/**'
-      - '.github/workflows/dsh.yml'
     tags:
-      - 'archify-dsh-v*'
-  schedule:
-    - cron: '17 6 * * 1'
+      - '**'
   workflow_dispatch:
     inputs:
       adapter_release:
